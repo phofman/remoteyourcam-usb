@@ -16,10 +16,11 @@
 package com.remoteyourcam.usb.view;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class AspectRatioImageView extends ImageView {
+public class AspectRatioImageView extends AppCompatImageView {
 
     private int thumbWidth;
     private int thumbHeight;

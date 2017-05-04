@@ -15,12 +15,12 @@
  */
 package com.remoteyourcam.usb.view;
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.remoteyourcam.usb.AppSettings;
 import com.remoteyourcam.usb.ptp.Camera;
 
-public abstract class SessionActivity extends Activity {
+public abstract class SessionActivity extends AppCompatActivity {
 
     public abstract Camera getCamera();
 
