@@ -17,12 +17,8 @@ package com.remoteyourcam.usb;
 
 import java.io.File;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -41,6 +37,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.remoteyourcam.usb.activities.AppSettingsActivity;
 import com.remoteyourcam.usb.ptp.Camera;
@@ -68,17 +68,17 @@ public class MainActivity extends SessionActivity implements CameraListener {
         }
 
         @Override
-        public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
             ft.add(R.id.fragment_container, fragment);
         }
 
         @Override
-        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
             ft.remove(fragment);
         }
 
         @Override
-        public void onTabReselected(Tab tab, FragmentTransaction ft) {
+        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
         }
 
     }
@@ -132,12 +132,13 @@ public class MainActivity extends SessionActivity implements CameraListener {
 
         settings = new AppSettings(this);
 
-        ActionBar bar = getActionBar();
-
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        bar.setDisplayHomeAsUpEnabled(false);
-        bar.addTab(bar.newTab().setText("Session").setTabListener(new MyTabListener(new TabletSessionFragment())));
-        bar.addTab(bar.newTab().setText("Gallery").setTabListener(new MyTabListener(new GalleryFragment())));
+        final ActionBar bar = getSupportActionBar();
+        if (bar != null) {
+            bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+            bar.setDisplayHomeAsUpEnabled(false);
+            bar.addTab(bar.newTab().setText("Session").setTabListener(new MyTabListener(new TabletSessionFragment())));
+            bar.addTab(bar.newTab().setText("Gallery").setTabListener(new MyTabListener(new GalleryFragment())));
+        }
 
         int appVersionCode = -1;
         try {
@@ -154,7 +155,7 @@ public class MainActivity extends SessionActivity implements CameraListener {
     }
 
     private void showChangelog() {
-        FragmentTransaction changelogTx = getFragmentManager().beginTransaction();
+        FragmentTransaction changelogTx = getSupportFragmentManager().beginTransaction();
         WebViewDialogFragment changelogFragment = WebViewDialogFragment.newInstance(R.string.whats_new,
                 "file:///android_asset/changelog/changelog.html");
         changelogTx.add(changelogFragment, "changelog");
@@ -330,7 +331,10 @@ public class MainActivity extends SessionActivity implements CameraListener {
             dismissDialog(DIALOG_NO_CAMERA);
         } catch (IllegalArgumentException e) {
         }
-        getActionBar().setTitle(camera.getDeviceName());
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(camera.getDeviceName());
+        }
         camera.setCapturedPictureSampleSize(settings.getCapturedPictureSampleSize());
         sessionFrag.cameraStarted(camera);
     }
