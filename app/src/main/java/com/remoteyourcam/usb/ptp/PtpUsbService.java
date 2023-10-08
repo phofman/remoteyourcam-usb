@@ -114,7 +114,7 @@ public class PtpUsbService implements PtpService {
             if (device != null) {
                 registerPermissionReceiver(context);
                 PendingIntent mPermissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(
-                        ACTION_USB_PERMISSION), 0);
+                        ACTION_USB_PERMISSION), PendingIntent.FLAG_IMMUTABLE);
                 usbManager.requestPermission(device, mPermissionIntent);
             } else {
                 listener.onNoCameraFound();

@@ -19,7 +19,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +36,8 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentTransaction;
 
 import com.remoteyourcam.usb.R;
 import com.remoteyourcam.usb.ptp.Camera;

@@ -19,9 +19,9 @@ package com.remoteyourcam.usb.ptp;
  * {@code PtpActions} execute one or more {@code Command}s against the actual
  * hardware.
  *
- * A {@code PtpCamera} queues {@Code PtpAction}s into the worker thread
+ * A {@code PtpCamera} queues {@code PtpAction}s into the worker thread
  * for further communications. The action should do the communication via the
- * given {@code IO} interface and based on the received data and response repor
+ * given {@code IO} interface and based on the received data and response report
  * back to the actual {@code PtpCamera}.
  */
 public interface PtpAction {

@@ -26,6 +26,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+
 import com.remoteyourcam.usb.GestureDetector;
 import com.remoteyourcam.usb.GestureDetector.GestureHandler;
 import com.remoteyourcam.usb.PictureView;
@@ -75,7 +79,13 @@ public class PictureFragment extends SessionFragment implements Camera.RetrieveI
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().getActionBar().hide();
+        final FragmentActivity activity = getActivity();
+        if (activity instanceof AppCompatActivity) {
+            final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.hide();
+            }
+        }
         if (camera() == null) {
 
         } else if (picture == null) {
@@ -87,7 +97,13 @@ public class PictureFragment extends SessionFragment implements Camera.RetrieveI
     public void onStop() {
         super.onStop();
         if (isRemoving()) {
-            getActivity().getActionBar().show();
+            final FragmentActivity activity = getActivity();
+            if (activity instanceof AppCompatActivity) {
+                final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.show();
+                }
+            }
         }
     }
 

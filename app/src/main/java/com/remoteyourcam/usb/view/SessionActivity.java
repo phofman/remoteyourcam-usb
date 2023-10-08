@@ -15,7 +15,7 @@
  */
 package com.remoteyourcam.usb.view;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.remoteyourcam.usb.AppSettings;
 import com.remoteyourcam.usb.ptp.Camera;
